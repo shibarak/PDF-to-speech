@@ -12,6 +12,7 @@ class Pdf:
         self.retstr = io.StringIO()
         self.laparams = LAParams()
         self.device = TextConverter(self.rsrcmgr, self.retstr, laparams=self.laparams)
+        self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)
         # Create a PDF interpreter object.
 
         # Process each page contained in the document.
@@ -20,12 +21,10 @@ class Pdf:
 
     #  Converts PDF to a string.
     def pdftt(self):
-        self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)
         fp = open(self.pdf_data, 'rb')
         for page in PDFPage.get_pages(fp):
             self.interpreter.process_page(page)
             self.text = self.retstr.getvalue()
-        print(self.text)
         self.reset()
 
     # Resets the parser so it's clear for the next PDF
@@ -34,3 +33,4 @@ class Pdf:
         self.retstr = io.StringIO()
         self.laparams = LAParams()
         self.device = TextConverter(self.rsrcmgr, self.retstr, laparams=self.laparams)
+        self.interpreter = PDFPageInterpreter(self.rsrcmgr, self.device)

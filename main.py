@@ -53,7 +53,6 @@ def load_pdf():
 def set_voice(x):
 
     audio.voice_key = x
-    print(audio.voice_key)
     button_state()
 
 def create_mp3():
@@ -64,7 +63,6 @@ def create_mp3():
                                                             )
                                                         )
     audio.create_mp3(text=pdf.text, path=path)
-    print(path)
     path_split = path.split("/")
     showinfo(title="Success!", message=f"Your file has been saved to {path_split[-2]} as {path_split[-1]}.")
 
